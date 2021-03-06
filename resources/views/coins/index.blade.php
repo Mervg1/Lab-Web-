@@ -3,9 +3,12 @@
 @section('content')
 <h1>List of Coins</h1>
 <p>
-    <a href="{{ route('coins.create') }} ">Create a coin </a>
+    @auth
+        {{ auth()->user()->email }}
+        <a href="{{ route('coins.create') }}">Create a coin</a>
+        <a href="{{ route('auth.logout') }}">Logout</a>
+    @endauth
 </p>
-
 <table>
     <thead>
         <tr>
