@@ -5,6 +5,8 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Carbon;
+
 class ValidateHour
 {
     /**
@@ -15,7 +17,13 @@ class ValidateHour
      * @return mixed
      */
     public function handle(Request $request, Closure $next)
-    {
+    {   
+        $date = Carbon::now('America/Mexico-city');
+        $dateBlock = Carbon::parse('2021-03-05 20:00:20', 'America/Mexico_city');
+        if($date->gte($dateBlock)){
+            return redirect()->route('coins.create');
+        }
         return $next($request);
+        //return abort(500);
     }
 }
